@@ -1,0 +1,33 @@
+server:  
+  port: 8000
+spring:  
+  application:
+    name: appointment-management-service
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+  cloud:  
+    stream:
+      bindings:
+        output:
+          destination: appointments-request
+        input:
+          destination: appointments-reply
+      rabbit:
+        bindings:
+          output:
+            producer:
+              exchangeType: direct
+              routingKeyExpression: '"#"'
+          input:
+            consumer:
+              exchangeType: direct
+  jpa: 
+     show-sql: true
+  h2:
+     console:
+        enabled: true
+
+
+
+
